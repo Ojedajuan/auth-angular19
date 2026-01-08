@@ -1,0 +1,34 @@
+{
+  "name": "12-auth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deps:check": "pnpm outdated",
+    "deps:update": "pnpm update --latest",
+    "deps:audit": "pnpm audit",
+    "deps:list": "pnpm list --depth=1",
+    "dev": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.0",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dataconnect-generated": "link:../../../AppData/Local/pnpm/global/5/node_modules/src/dataconnect-generated",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "firebase": "^12.7.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "tsx": "^4.21.0"
+  }
+}
