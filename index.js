@@ -25,7 +25,10 @@ app.listen( process.env.PORT, () => {
     console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
 });
 
-//Manejar demas rutas
-app.use('*', (req, res) => {
-    res.sendFile( __dirname + '/public/index.html' );
-});
+//Servir archivos estáticos (catch-all para SPA)
+app.use(express.static('public', {
+    index: 'index.html',
+    setHeaders: (res, path) => {
+        if (path.endsWith('.js')) res.setHeader('Content-Type', 'text/javascript');
+    }
+}));
