@@ -45,7 +45,10 @@ app.use((req, res, next) => {
 });
 
 //CORS
-app.use(cors());
+app.use(cors({
+  origin: ['https://auth-angular19-production.up.railway.app', 'http://localhost:4200'],
+  credentials: true
+}));
 
 //LECTURA Y PARSEO DEL BODY
 app.use(express.json());
