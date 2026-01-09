@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "NIXPACKS", 
+    "buildCommand": "pnpm install --no-frozen-lockfile"
+  },
+  "deploy": {
+    "startCommand": "pnpm start"
+  } 
+}
