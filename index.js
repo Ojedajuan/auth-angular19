@@ -17,16 +17,7 @@ const app = express();
 //BASE DE DATOS
 dbConeccion();
 
-//DIRECTORIO PUBLICO con reemplazo dinámico de URL
-app.use(express.static('public', {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'text/javascript');
-    }
-  }
-}));
-
-// Middleware para reemplazar URLs en archivos JS
+// Middleware para reemplazar URLs en archivos JS (antes de static)
 app.use((req, res, next) => {
   if (req.path.endsWith('.js')) {
     const filePath = __dirname + '/public' + req.path;
@@ -49,6 +40,9 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+//DIRECTORIO PUBLICO
+app.use(express.static('public'));
 
 //CORS
 app.use(cors({
