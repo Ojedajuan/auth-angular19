@@ -34,10 +34,14 @@ app.use((req, res, next) => {
     
     // Reemplazar URLs hardcodeadas con la URL actual
     const currentHost = `https://${req.headers.host}`;
+    const originalContent = content;
     content = content.replace(/http:\/\/localhost:\d+/g, currentHost);
     content = content.replace(/http:\/\/127\.0\.0\.1:\d+/g, currentHost);
     
-    console.log(`Reemplazando localhost con ${currentHost} en ${req.path}`);
+    console.log(`Procesando JS: ${req.path}`);
+    console.log(`Tenía localhost: ${originalContent.includes('localhost:4000')}`);
+    console.log(`Reemplazado con: ${currentHost}`);
+    console.log(`Ahora tiene localhost: ${content.includes('localhost:4000')}`);
     
     res.setHeader('Content-Type', 'text/javascript');
     res.send(content);
