@@ -26,6 +26,6 @@ app.listen( process.env.PORT, () => {
 });
 
 //Manejar demas rutas
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
     res.sendFile( __dirname + '/public/index.html' );
 });
