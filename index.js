@@ -34,7 +34,7 @@ app.listen( process.env.PORT, () => {
 });
 
 //Servir archivos estáticos (catch-all para SPA)
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   let html = fs.readFileSync(__dirname + '/public/index.html', 'utf8');
   const apiUrl = process.env.API_URL || `https://${req.headers.host}/api`;
   html = html.replace('<head>', `<head><script>window.API_URL = '${apiUrl}';</script>`);
