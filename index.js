@@ -17,8 +17,32 @@ const app = express();
 //BASE DE DATOS
 dbConeccion();
 
-//DIRECTORIO PUBLICO
-app.use( express.static('public') );
+//DIRECTORIO PUBLICO con reemplazo dinámico de URL
+app.use(express.static('public', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'text/javascript');
+    }
+  }
+}));
+
+// Middleware para reemplazar URLs en archivos JS
+app.use((req, res, next) => {
+  if (req.path.endsWith('.js')) {
+    const filePath = __dirname + '/public' + req.path;
+    let content = fs.readFileSync(filePath, 'utf8');
+    
+    // Reemplazar URLs hardcodeadas con la URL actual
+    const currentHost = `https://${req.headers.host}`;
+    content = content.replace(/http:\/\/localhost:\d+/g, currentHost);
+    content = content.replace(/http:\/\/127\.0\.0\.1:\d+/g, currentHost);
+    
+    res.setHeader('Content-Type', 'text/javascript');
+    res.send(content);
+    return;
+  }
+  next();
+});
 
 //CORS
 app.use(cors());
