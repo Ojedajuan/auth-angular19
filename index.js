@@ -37,6 +37,8 @@ app.use((req, res, next) => {
     content = content.replace(/http:\/\/localhost:\d+/g, currentHost);
     content = content.replace(/http:\/\/127\.0\.0\.1:\d+/g, currentHost);
     
+    console.log(`Reemplazando localhost con ${currentHost} en ${req.path}`);
+    
     res.setHeader('Content-Type', 'text/javascript');
     res.send(content);
     return;
