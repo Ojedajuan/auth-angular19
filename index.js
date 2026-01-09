@@ -34,7 +34,13 @@ app.listen( process.env.PORT, () => {
 });
 
 //Servir archivos estáticos (catch-all para SPA)
-app.get('/*', (req, res) => {
+app.use((req, res, next) => {
+  // Si la ruta tiene extensión (archivo estático), continuar
+  if (req.path.includes('.')) {
+    return next();
+  }
+  
+  // Para rutas de SPA, inyectar API URL y servir index.html
   let html = fs.readFileSync(__dirname + '/public/index.html', 'utf8');
   const apiUrl = process.env.API_URL || `https://${req.headers.host}/api`;
   html = html.replace('<head>', `<head><script>window.API_URL = '${apiUrl}';</script>`);
