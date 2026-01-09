@@ -5,7 +5,7 @@ const dbConeccion = async () => {
   console.log("BD_CNN:", process.env.BD_CNN ? "Configurada" : "NO CONFIGURADA");
   
   try {
-    await mongoose.connect(process.env.BD_CNN);
+    await mongoose.connect(process.env.MONGODB_URI || process.env.BD_CNN);
     console.log("===================================");
     console.log("Base de datos online");
   } catch (error) {
