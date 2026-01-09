@@ -1,6 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+
+// Debug variables de entorno
+console.log('Variables de entorno:');
+console.log('BD_CNN:', process.env.BD_CNN ? 'Configurada' : 'NO CONFIGURADA');
+console.log('PORT:', process.env.PORT);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
 const { dbConeccion } = require('./src/database/config');
  
 
